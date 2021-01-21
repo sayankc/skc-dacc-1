@@ -1,0 +1,19 @@
+steps:
+- name: 'ubuntu'
+  id: 'step-Acc'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+        echo "Hello, world! ${_ACC}" > file
+        cat file
+        no_failure_count=`cat file| grep "accesibility" | wc -l`
+        echo "is text accesibility present $no_failure_count"
+        if [ "$no_failure_count" -ge 1 ]; then 
+        exit 0; 
+        else 
+        exit 255; 
+        fi
+
+substitutions:
+    _ACC: "dummy"
